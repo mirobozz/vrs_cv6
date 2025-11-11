@@ -26,7 +26,6 @@
 
 static inline uint32_t tick_ms(void){ return LL_GetTick(); }
 
-/* wait for LL flag or timeout; 0 ok, -1 NACK, -2 BERR, -3 TO */
 static int wait_flag_or_timeout(uint32_t (*flag_fn)(const I2C_TypeDef*),
                                 I2C_TypeDef *i2c, uint32_t ms)
 {
