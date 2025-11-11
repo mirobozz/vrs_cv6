@@ -63,7 +63,7 @@ float hts221_read_humidity(void)
               (float)(H_T0_OUT - H0_T0_OUT) /
               (float)(H1_T0_OUT - H0_T0_OUT);
 
-    if (rh < 0.f)   rh = 0.f;
+    if (rh < 0.f)rh = 0.f;
     if (rh > 100.f) rh = 100.f;
     return rh;
 }

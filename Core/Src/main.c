@@ -128,20 +128,23 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  float p0 = lps22hb_read_pressure_hpa();
+
   while (1)
   {
+	  float T  = hts221_read_temperature();
+	  float RH = hts221_read_humidity();
+	  float P  = lps22hb_read_pressure_hpa();
+	  float Alt = lps22hb_altitude_from_pressure(P, p0);
 
+	  char line[96];
+	  int n = snprintf(line, sizeof line, "%.2f,%.2f,%.2f,%.2f\r\n", T, RH, P, Alt);
+	  USART_Transmit((uint8_t*)line, (uint16_t)n);
+	  LL_mDelay(500);
   }
     /* USER CODE END WHILE */
-  float T  = hts221_read_temperature();
-  float RH = hts221_read_humidity();
-  float P  = lps22hb_read_pressure_hpa();
-  float Alt = (P>0.f && isfinite(P)) ? lps22hb_altitude_from_pressure(P, 1013.25f) : NAN;
 
-  char line[96];
-  int n = snprintf(line, sizeof line, "%.2f,%.2f,%.2f,%.2f\r\n", T, RH, P, Alt);
-  USART_Transmit((uint8_t*)line, (uint16_t)n);
-  LL_mDelay(500);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

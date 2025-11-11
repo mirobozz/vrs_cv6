@@ -37,5 +37,7 @@ float lps22hb_read_pressure_hpa(void)
 
 float lps22hb_altitude_from_pressure(float p_hpa, float p0_hpa)
 {
+    if (p_hpa <= 0.0f || !isfinite(p_hpa)) return NAN;
     return 44330.0f * (1.0f - powf(p_hpa / p0_hpa, 0.1903f));
 }
+
