@@ -1,0 +1,10 @@
+Debug/
+Release/
+*.ioc
+*.launch
+*.log
+*.o
+*.elf
+*.map
+.settings/
+.mxproject
